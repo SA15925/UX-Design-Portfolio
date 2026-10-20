@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="UX research and design portfolio of Safa Ansari: Vogue Studio (Best UX Design award), a Google Maps accessibility evaluation, and Discord for Classrooms.">
+<title>Safa Ansari Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a researcher's annotated notebook — single reading column, case studies marked up like her own screenshots (pins, circles, measured values) */
+:root{
+  --paper:#F5F6F8;
+  --surface:#FFFFFF;
+  --ink:#1A1E29;
+  --muted:#5A6172;
+  --rule:#DADDE4;
+  --mark:#C21F5B;      /* annotation pen */
+  --mark-soft:#FBE7EE;
+  --road:#748DBA;      /* the Google Maps road blue she measured */
+  --road-2:#688AC7;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --measure:66ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12141B; --surface:#1A1D26; --ink:#ECEEF3; --muted:#A3A9B8; --rule:#2E3340;
+    --mark:#FF6B9A; --mark-soft:#3A1A27; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12141B; --surface:#1A1D26; --ink:#ECEEF3; --muted:#A3A9B8; --rule:#2E3340;
+  --mark:#FF6B9A; --mark-soft:#3A1A27; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:1.0625rem; line-height:1.65;
+}
+.wrap{
+  max-width:1080px; margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+a{color:inherit; text-decoration-color:var(--mark); text-underline-offset:3px; text-decoration-thickness:2px}
+a:hover{color:var(--mark)}
+:focus-visible{outline:3px solid var(--mark); outline-offset:3px; border-radius:2px}
+h1,h2,h3{font-family:var(--display); line-height:1.08; text-wrap:balance; margin:0}
+p{margin:0}
+.label{font-family:var(--mono); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+
+/* top bar */
+.top{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-block:22px; border-bottom:1px solid var(--rule)}
+.top .name{font-family:var(--display); font-weight:800; font-size:1.05rem; letter-spacing:-.01em}
+.top nav{display:flex; gap:20px; flex-wrap:wrap; font-size:.95rem}
+.top nav a{text-decoration:none}
+.top nav a:hover{text-decoration:underline}
+
+/* intro */
+.intro{padding-block:72px 56px; display:grid; gap:28px}
+.intro h1{font-size:clamp(2.4rem, 6.5vw, 4.6rem); font-weight:800; letter-spacing:-.03em; max-width:16ch}
+.intro h1 .circled{position:relative; white-space:nowrap}
+.intro h1 .circled::after{
+  content:""; position:absolute; inset:-.08em -.22em -.02em -.18em;
+  border:3px solid var(--mark); border-radius:50% 46% 52% 48% / 58% 50% 54% 46%;
+  transform:rotate(-2deg); pointer-events:none;
+}
+.intro .lede{font-size:1.2rem; max-width:var(--measure); color:var(--ink)}
+.facts{display:flex; flex-wrap:wrap; gap:10px 28px; font-size:.95rem; color:var(--muted)}
+.facts b{color:var(--ink); font-weight:700}
+
+/* project cards */
+.work{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px; border-top:2px solid var(--ink); padding-top:32px}
+@media (max-width:900px){.work{grid-template-columns:minmax(0,1fr)}}
+.card{display:grid; gap:16px; align-content:start; text-decoration:none; color:inherit}
+.card .media{position:relative; aspect-ratio:16/11; max-width:100%; border-radius:6px; overflow:hidden; border:1px solid var(--rule); background:var(--surface)}
+.card .media img{width:100%; height:100%; object-fit:cover; object-position:top left; display:block; transition:transform .35s ease}
+.card:hover .media img{transform:scale(1.03)}
+@media (prefers-reduced-motion: reduce){.card .media img{transition:none} .card:hover .media img{transform:none}}
+.card:hover h3{color:var(--mark)}
+.card-text{display:grid; gap:6px}
+.card h3{font-size:clamp(1.35rem, 2.4vw, 1.7rem); font-weight:600; letter-spacing:-.02em; transition:color .15s}
+.card p{color:var(--muted); font-size:.98rem}
+.award{display:inline-flex; align-items:center; gap:8px; width:fit-content; font-family:var(--mono); font-size:.8rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:#FFFFFF; background:var(--mark); padding:6px 12px; border-radius:99px}
+.award-tag{background:var(--mark); color:#FFFFFF}
+.judges{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; font-size:1.05rem; padding:12px 16px; border-left:3px solid var(--mark); background:var(--surface); border-radius:0 6px 6px 0; width:fit-content; max-width:100%}
+.card .card-judges{font-family:var(--mono); font-size:.78rem; color:var(--ink)}
+.card .kind{font-family:var(--mono); font-size:.74rem; letter-spacing:.04em; color:var(--mark)}
+.tag{position:absolute; left:12px; bottom:12px; font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; background:var(--ink); color:var(--paper); padding:5px 9px; border-radius:4px}
+.play{position:absolute; inset:0; margin:auto; width:56px; height:56px; border-radius:50%; background:var(--mark); color:#FFFFFF; display:grid; place-items:center; box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.play svg{margin-left:3px}
+.discord-art{display:grid; place-items:center; background:linear-gradient(160deg, var(--surface), var(--mark-soft))}
+.chan-list{display:grid; gap:6px; width:min(78%, 280px); font-family:var(--mono); font-size:.82rem}
+.chan-label{font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:4px}
+.chan{display:flex; align-items:center; gap:8px; background:var(--paper); border:1px solid var(--rule); border-radius:5px; padding:7px 10px; color:var(--ink); font-weight:500}
+.chan b{color:var(--muted); font-weight:400}
+.chan i{margin-left:auto; font-style:normal; background:var(--mark); color:#FFFFFF; border-radius:99px; padding:1px 8px; font-size:.72rem}
+.chan.muted{color:var(--muted)}
+
+/* galleries */
+.gallery{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.gallery figure{padding:0; overflow:hidden}
+.gallery img{display:block; width:100%; height:auto; border-bottom:1px solid var(--rule)}
+.gallery figcaption{margin:0; padding:12px 14px; font-size:.9rem}
+.gallery figcaption b{color:var(--ink); display:block; font-family:var(--display); font-size:1rem}
+@media (max-width:640px){.gallery{grid-template-columns:minmax(0,1fr)}}
+.shot{margin-top:6px; padding:0; overflow:hidden}
+.shot img{display:block; width:100%; height:auto}
+
+/* video cover */
+.video{position:relative; display:block; border-radius:6px; overflow:hidden; border:1px solid var(--rule); text-decoration:none}
+.video img{display:block; width:100%; height:auto; filter:brightness(.55)}
+.video .play{width:76px; height:76px}
+.video .vlabel{position:absolute; left:18px; bottom:16px; right:18px; color:#FFFFFF; display:grid; gap:2px}
+.video .vlabel b{font-family:var(--display); font-size:clamp(1.1rem, 2.4vw, 1.5rem)}
+.video .vlabel span{font-family:var(--mono); font-size:.78rem; opacity:.9}
+.video:hover .play{transform:scale(1.06)}
+.video .play{transition:transform .15s}
+
+/* case studies */
+.case{padding-block:96px 24px}
+.case + .case{border-top:1px solid var(--rule)}
+.case-head{display:grid; gap:18px; margin-bottom:40px}
+.case-head h2{font-size:clamp(2rem, 5vw, 3.4rem); font-weight:800; letter-spacing:-.025em}
+.case-head .sub{font-size:1.2rem; color:var(--muted); max-width:var(--measure)}
+.meta{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:6px; overflow:hidden}
+.meta div{background:var(--surface); padding:14px 16px; min-width:0}
+.meta dd{margin:4px 0 0; font-size:.95rem}
+.meta dt{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+@media (max-width:720px){.meta{grid-template-columns:repeat(2, minmax(0,1fr))}}
+
+.status{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--mark); background:var(--mark-soft); padding:4px 10px; border-radius:99px; width:fit-content}
+.status::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--mark)}
+
+.block{display:grid; grid-template-columns:200px minmax(0,1fr); gap:24px 40px; padding-block:28px; border-top:1px solid var(--rule)}
+.block > h3{font-size:1rem; font-family:var(--mono); font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:4px}
+.block .body{display:grid; gap:16px; max-width:var(--measure)}
+.block .body.wide{max-width:none}
+@media (max-width:760px){.block{grid-template-columns:minmax(0,1fr); gap:12px}}
+
+.big-q{font-family:var(--display); font-size:clamp(1.35rem, 2.8vw, 1.85rem); font-weight:600; line-height:1.25; letter-spacing:-.015em}
+.big-q em{font-style:normal; background:linear-gradient(transparent 62%, var(--mark-soft) 62%)}
+
+ul.plain{margin:0; padding:0; list-style:none; display:grid; gap:10px}
+ul.plain li{padding-left:22px; position:relative}
+ul.plain li::before{content:""; position:absolute; left:0; top:.68em; width:10px; height:2px; background:var(--mark)}
+
+/* numbered annotation findings */
+.findings{display:grid; gap:0; counter-reset:f}
+.finding{display:grid; grid-template-columns:2.4rem minmax(0,1fr); gap:16px; padding-block:18px; border-bottom:1px dashed var(--rule)}
+.finding:last-child{border-bottom:0}
+.finding .n{
+  width:2rem; height:2rem; border-radius:50%; border:2px solid var(--mark); color:var(--mark);
+  display:grid; place-items:center; font-family:var(--mono); font-weight:500; font-size:.9rem;
+}
+.finding h4{margin:0 0 4px; font-family:var(--display); font-size:1.15rem; font-weight:600}
+.finding .src{font-family:var(--mono); font-size:.75rem; color:var(--muted); display:block; margin-bottom:6px}
+.finding p + p{margin-top:8px}
+.finding .fix{font-size:.95rem; color:var(--muted)}
+.finding .fix b{color:var(--ink)}
+
+/* design decisions table */
+.decisions{display:grid; gap:0; border:1px solid var(--rule); border-radius:6px; overflow:hidden; background:var(--surface)}
+.decision{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr); gap:16px; padding:14px 18px; border-top:1px solid var(--rule); align-items:start}
+.decision:first-child{border-top:0}
+.decision.head{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); background:var(--paper)}
+.decision .no{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--mark)}
+.decision .yes{font-weight:700}
+.decision .why{color:var(--muted); font-size:.95rem}
+@media (max-width:720px){
+  .decision{grid-template-columns:minmax(0,1fr)}
+  .decision.head{display:none}
+  .decision .no::before{content:"Instead of: "; text-decoration:none; display:inline}
+}
+
+/* figures */
+figure{margin:0; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:20px}
+figcaption{font-size:.9rem; color:var(--muted); margin-top:14px}
+.chart-scroll{overflow-x:auto}
+
+/* contrast specimen */
+.contrast{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.1fr); gap:16px; align-items:stretch}
+.swatch{border-radius:4px; min-height:120px; display:flex; align-items:flex-end; padding:12px; font-family:var(--mono); font-size:.8rem; color:#FFFFFF}
+.ratio{display:grid; align-content:center; gap:6px; padding:8px 4px}
+.ratio .val{font-family:var(--display); font-size:2.8rem; font-weight:800; letter-spacing:-.03em; color:var(--mark); line-height:1}
+.ratio .req{font-family:var(--mono); font-size:.8rem; color:var(--muted)}
+.bar{height:10px; border-radius:99px; background:var(--rule); position:relative; overflow:hidden; margin-top:6px}
+.bar span{position:absolute; inset:0 auto 0 0; background:var(--mark)}
+@media (max-width:640px){.contrast{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .ratio{grid-column:1 / -1}}
+
+/* quotes */
+.quotes{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.quote{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; display:grid; gap:10px; align-content:start}
+.quote p{font-family:var(--display); font-size:1.1rem; line-height:1.35; font-weight:600}
+.quote span{font-family:var(--mono); font-size:.75rem; color:var(--muted)}
+@media (max-width:640px){.quotes{grid-template-columns:minmax(0,1fr)}}
+
+/* progress steps */
+.steps{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:8px; list-style:none; margin:0; padding:0}
+.steps li{border-top:4px solid var(--rule); padding-top:10px; font-size:.9rem}
+.steps li.done{border-color:var(--mark)}
+.steps li span{display:block; font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+@media (max-width:640px){.steps{grid-template-columns:repeat(2, minmax(0,1fr))}}
+
+/* about */
+.about{padding-block:96px 48px; border-top:2px solid var(--ink); display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:48px}
+.about h2{font-size:clamp(1.8rem, 4vw, 2.6rem); font-weight:800; letter-spacing:-.02em; margin-bottom:18px}
+.about .body{display:grid; gap:14px; max-width:var(--measure)}
+.about dl{margin:0; display:grid; gap:18px}
+.about dt{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+.about dd{margin:4px 0 0}
+@media (max-width:760px){.about{grid-template-columns:minmax(0,1fr)}}
+
+.contact{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:8px}
+.email{font-family:var(--mono); font-size:.95rem; background:var(--surface); border:1px solid var(--rule); padding:10px 14px; border-radius:6px; user-select:all; overflow-wrap:anywhere}
+button.copy{font:inherit; font-size:.95rem; font-weight:700; background:var(--ink); color:var(--paper); border:0; border-radius:6px; padding:10px 16px; cursor:pointer; min-height:44px}
+button.copy:hover{background:var(--mark)}
+.links{display:flex; gap:20px; flex-wrap:wrap}
+footer{padding-block:32px 48px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--rule)}
+</style>
+
+<style>body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="name">Safa Ansari</span>
+    <nav aria-label="Sections">
+      <a href="#vogue-studio">Vogue Studio</a>
+      <a href="#google-maps">Google Maps</a>
+      <a href="#discord">Discord</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <section class="intro" aria-labelledby="hello">
+    <span class="label">UX Research &amp; Design · Houston, TX</span>
+    <h1 id="hello">Designing to cater to the user and their <span class="circled">needs</span>.</h1>
+    <p class="lede">I'm a computer science senior at the University of Houston who studies where software doesn't capture what people actually need, and sometimes makes it harder for them to get things done, from clinicians working around hospital alerts to drivers second-guessing their navigation app. I pair user interviews and accessibility audits with prototypes, and I can build what I design.</p>
+    <div class="facts">
+      <span><b>B.S. Computer Science</b>, Dec 2026</span>
+      <span><b>Focus:</b> research, accessibility, prototyping</span>
+      <span><b>Best UX Design award</b>, Kanvas × Vogue design sprint</span>
+      <span><b>Open to</b> UX research and product design roles</span>
+    </div>
+  </section>
+
+  <section class="work" aria-label="Projects">
+    <a class="card" href="#vogue-studio">
+      <div class="media"><img src="img/vs-feed.webp" alt="Vogue Studio homepage: a feed of student artwork cards, each showing what the student wants help with"><span class="tag award-tag">Best UX Design award</span></div>
+      <div class="card-text">
+        <span class="kind">01 · Design sprint · Website prototype</span>
+        <h3>Vogue Studio</h3>
+        <p>A feedback platform where teen creators share unfinished work without fear of judgment.</p>
+        <p class="card-judges">Best UX Design award · Judged by Tina Tang and Kodi Agbasi of Apple</p>
+      </div>
+    </a>
+    <a class="card" href="#google-maps">
+      <div class="media">
+        <img src="img/gm-contrast.webp" alt="Slide from the Google Maps evaluation showing a 1.03 to 1 contrast ratio between two road colors">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        <span class="tag">Video essay</span>
+      </div>
+      <div class="card-text">
+        <span class="kind">02 · Expert review · Accessibility</span>
+        <h3>Google Maps, measured</h3>
+        <p>A usability and accessibility evaluation of highway navigation, with a 1.03:1 contrast failure at its center.</p>
+      </div>
+    </a>
+    <a class="card" href="#discord">
+      <div class="media discord-art" aria-hidden="true">
+        <div class="chan-list">
+          <span class="chan-label">Class server · unread</span>
+          <span class="chan"><b>#</b> announcements <i>3</i></span>
+          <span class="chan"><b>#</b> homework-help <i>47</i></span>
+          <span class="chan"><b>#</b> exam-review <i>12</i></span>
+          <span class="chan"><b>#</b> off-topic <i>99+</i></span>
+          <span class="chan muted"><b>#</b> resources</span>
+        </div>
+        <span class="tag">Research in progress</span>
+      </div>
+      <div class="card-text">
+        <span class="kind">03 · User research · In progress</span>
+        <h3>Discord for Classrooms</h3>
+        <p>Interviewing students and TAs about why class servers turn into noise and important posts get buried.</p>
+      </div>
+    </a>
+  </section>
+
+  <!-- ============ VOGUE STUDIO ============ -->
+  <article class="case" id="vogue-studio" aria-labelledby="vs-title">
+    <div class="case-head">
+      <span class="label">Case study 01 · Kanvas × Vogue Future Creators Lab</span>
+      <span class="award"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.5L12 16.8 6.1 20l1.3-6.5L2.5 8.9l6.6-.8z" fill="currentColor"/></svg>Winner · Best UX Design</span>
+      <h2 id="vs-title">Vogue Studio: room for your next draft</h2>
+      <p class="sub">A website where high school creators share work in progress and get feedback specific enough to act on.</p>
+      <dl class="meta">
+        <div><dt>My role</dt><dd>UX designer and researcher</dd></div>
+        <div><dt>Client</dt><dd>Kanvas × Vogue Future Creators Lab</dd></div>
+        <div><dt>Timeline</dt><dd>Design sprint, Oct 2026</dd></div>
+        <div><dt>Methods</dt><dd>Persona, journey map, HMW, prototyping</dd></div>
+      </dl>
+      <p class="judges"><span class="label">Presented to judges from Apple</span> <b>Tina Tang</b> and <b>Kodi Agbasi</b></p>
+    </div>
+
+    <section class="block">
+      <h3>The problem</h3>
+      <div class="body">
+        <p class="big-q">Teen creators hold back unfinished work because they fear being judged. When they do share it, they get <em>“looks good,”</em> which doesn't help them improve.</p>
+        <p>Kanvas × Vogue works with young creators from underrepresented communities, where mentorship and expert feedback are hard to come by. The alternative is expensive: one art school portfolio coaching package I found costs $1,999, with only 15 spots a season.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Who I designed for</h3>
+      <div class="body">
+        <p><b>Jules, 16, grade 11.</b> She makes traditional art and wants guidance on one detail of her piece. She is afraid of being judged because it isn't finished, and the feedback she gets now is “looks good.”</p>
+        <p>The insight that shaped everything: <b>students think reviewers want perfection, but reviewers want to see experimentation and growth.</b> So I designed a space where unfinished work is the point.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Journey map</h3>
+      <div class="body wide">
+        <figure>
+          <div class="chart-scroll">
+            <svg viewBox="0 0 760 250" role="img" aria-labelledby="jm-t jm-d" style="width:100%; min-width:560px; height:auto; display:block">
+              <title id="jm-t">Jules's emotional journey across six steps</title>
+              <desc id="jm-d">Excited when starting, lowest when deciding to share, recovering after acting on feedback, and proud when sharing version two.</desc>
+              <rect x="150" y="10" width="330" height="170" fill="var(--mark-soft)" />
+              <text x="315" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="var(--mark)">WHERE WE FOCUSED</text>
+              <line x1="40" y1="180" x2="720" y2="180" stroke="var(--rule)" stroke-width="1" />
+              <polyline fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"
+                points="70,52 205,158 315,128 425,140 560,78 690,40" />
+              <g fill="var(--surface)" stroke="var(--mark)" stroke-width="2.5">
+                <circle cx="70" cy="52" r="7"/><circle cx="205" cy="158" r="9"/><circle cx="315" cy="128" r="7"/>
+                <circle cx="425" cy="140" r="7"/><circle cx="560" cy="78" r="7"/><circle cx="690" cy="40" r="7"/>
+              </g>
+              <g font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)" text-anchor="middle">
+                <text x="70" y="78">Excited</text><text x="205" y="138">Nervous</text><text x="315" y="108">Unsure</text>
+                <text x="425" y="120">Let down</text><text x="560" y="104">Motivated</text><text x="690" y="66">Proud</text>
+              </g>
+              <g font-family="Atkinson Hyperlegible, sans-serif" font-size="13" fill="var(--ink)" text-anchor="middle">
+                <text x="70" y="204">Start a piece</text><text x="205" y="204">Decide to share</text><text x="315" y="204">Post the draft</text>
+                <text x="425" y="204">Get feedback</text><text x="560" y="204">Improve it</text><text x="690" y="204">Share version 2</text>
+              </g>
+              <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)" text-anchor="middle">
+                <text x="205" y="222">lowest point</text><text x="425" y="222">“looks good”</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption>The lowest point is the moment of deciding to share. Steps 2 to 4 are where Jules needs the most support, so that's where the design focuses.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>How might we</h3>
+      <div class="body">
+        <p class="big-q">How might we help young creators feel <em>safe sharing unfinished work</em> and get <em>specific feedback they can use?</em></p>
+        <p>I set aside two alternatives. “Make students more confident artists” was too broad, and “add a comment section to art posts” jumped straight to a solution. Mine names both halves of the problem: feeling safe, and feedback that helps.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Design decisions</h3>
+      <div class="body wide">
+        <p style="max-width:var(--measure)">I borrowed one strength from each of three platforms: LinkedIn's record of growth, Instagram's visual feed, and Reddit's threaded communities. Every major choice was a deliberate trade-off.</p>
+        <div class="decisions" role="table" aria-label="Design decisions">
+          <div class="decision head" role="row"><span role="columnheader">Instead of</span><span role="columnheader">I chose</span><span role="columnheader">Why</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Likes on artwork</span><span class="yes" role="cell">Upvotes on helpful feedback</span><span class="why" role="cell">The best critiques rise, and nobody compares like counts on their art.</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Open comment box</span><span class="yes" role="cell">Sentence starters: “I like…”, “I wonder…”, “What if…”</span><span class="why" role="cell">Keeps feedback kind and specific, which matters on a platform for minors.</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Comments under the post</span><span class="yes" role="cell">Annotating right on the work</span><span class="why" role="cell">Pins, circles and arrows point to the exact spot, so feedback is concrete.</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Public posts</span><span class="yes" role="cell">“Who do you want feedback from?”</span><span class="why" role="cell">Sharing a draft feels safer with classmates or a mentor before the whole lab.</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Loose posts</span><span class="yes" role="cell">Required project folders</span><span class="why" role="cell">Every version stays together, which makes before-and-after compare possible.</span></div>
+          <div class="decision" role="row"><span class="no" role="cell">Followers</span><span class="yes" role="cell">Connections, no counts</span><span class="why" role="cell">Removes the pressure to be popular before you're willing to share.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>The prototype</h3>
+      <div class="body">
+        <p>I prototyped the core task: a student shares an unfinished design, gets feedback, and posts the next version.</p>
+        <ul class="plain">
+          <li><b>Studio feed.</b> Tabs for For you, Connections and Needs feedback. Cards show the student's question and critique counts, never like counts.</li>
+          <li><b>Share a draft.</b> Upload, file into a project folder, choose a stage (sketch, draft, almost done), and pick who can respond: classmates, teachers, mentors, professionals or KxV staff.</li>
+          <li><b>Post and annotated feedback.</b> Numbered pins on the image match numbered comments, each written with a sentence starter.</li>
+          <li><b>Profile as portfolio.</b> Project folders split into In Progress and Completed, with first and final versions side by side.</li>
+        </ul>
+        <div class="gallery">
+          <figure><img src="img/vs-feed.webp" alt="Studio feed with artwork cards showing each student's question, tags and critique counts" loading="lazy"><figcaption><b>Studio feed</b>Each card leads with what the student wants help with. No like counts.</figcaption></figure>
+          <figure><img src="img/vs-share-draft.webp" alt="Share a draft form with project folder, art type, stage, feedback focus, and who to ask for feedback" loading="lazy"><figcaption><b>Share a draft</b>Students choose the stage, what they need help with, and who can respond.</figcaption></figure>
+          <figure><img src="img/vs-feedback.webp" alt="Post page with a horse painting marked with numbered pins and matching mentor and student comments" loading="lazy"><figcaption><b>Annotated feedback</b>Numbered pins on the art match numbered comments built from sentence starters.</figcaption></figure>
+          <figure><img src="img/vs-profile.webp" alt="Profile for Jules showing in-progress project folders, each asking for advice" loading="lazy"><figcaption><b>Profile as portfolio</b>Work in progress is shown, not hidden, with a Build Portfolio button.</figcaption></figure>
+        </div>
+        <p>Accessibility was a checklist item on every screen: 4.5:1 text contrast, 16px minimum body text, 44 × 44 px touch targets, and no information carried by color alone.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Measuring success</h3>
+      <div class="body">
+        <ul class="plain">
+          <li>Students post unfinished work, not just final pieces.</li>
+          <li>Most feedback uses a sentence starter or an annotation.</li>
+          <li>Students come back to post a second version.</li>
+          <li>Students finish with a portfolio that shows growth.</li>
+        </ul>
+        <p>A pilot would need one lab cohort with guardian permission, mentors who commit to response times, and private-by-default profiles with reviewed comments.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>What I learned</h3>
+      <div class="body">
+        <p>Students fear sharing more than they lack skill, and small choices like hiding like counts lower that pressure more than any feature. Next time I'd test with real lab students before polishing screens, and treat safety and accessibility as constraints from day one instead of a final pass.</p>
+      </div>
+    </section>
+  </article>
+
+  <!-- ============ GOOGLE MAPS ============ -->
+  <article class="case" id="google-maps" aria-labelledby="gm-title">
+    <div class="case-head">
+      <span class="label">Case study 02 · Usability and accessibility evaluation</span>
+      <h2 id="gm-title">“Wait, do I get on now?” Evaluating Google Maps on the highway</h2>
+      <p class="sub">An expert review of Google Maps driving navigation, grounded in my own drives through Houston's freeways and frontage roads.</p>
+      <dl class="meta">
+        <div><dt>My role</dt><dd>Solo evaluator</dd></div>
+        <div><dt>Course</dt><dd>Human-Computer Interaction</dd></div>
+        <div><dt>Timeline</dt><dd>Sept 2026</dd></div>
+        <div><dt>Methods</dt><dd>Heuristic review, WCAG audit, comparative analysis</dd></div>
+      </dl>
+    </div>
+
+    <section class="block">
+      <h3>Watch</h3>
+      <div class="body wide">
+        <a class="video" href="https://docs.google.com/videos/d/1no_EDrGsDjTrtv2w5hHSxkHvq2qcbzH8WMPfOcyhxkM/view" target="_blank" rel="noopener">
+          <img src="img/gm-contrast.webp" alt="" loading="lazy">
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+          <span class="vlabel"><b>Watch the video essay</b><span>Live demo · closed captions · audio descriptions · opens in a new tab</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Why this app</h3>
+      <div class="body">
+        <p>Houston highways stack several lanes next to parallel frontage roads, and that's where I kept getting confused: stay on the freeway, or take the ramp? I wanted to know whether that confusion was me or the interface, so I evaluated it against two of Shneiderman's Eight Golden Rules and two WCAG 2.1 success criteria, using my own screenshots and screen recordings as evidence.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Findings</h3>
+      <div class="body">
+        <div class="findings">
+          <div class="finding">
+            <span class="n" aria-hidden="true">1</span>
+            <div>
+              <h4>Lane guidance contradicted the real road</h4>
+              <span class="src">Golden Rule 3 · Offer informative feedback</span>
+              <p>At one intersection the overhead sign showed two lanes I could use to turn right. Maps showed only one. When feedback is wrong, it's worse than none, because drivers trust it.</p>
+              <p class="fix"><b>Fix:</b> accurate, consistent lane confirmation at every decision point.</p>
+              <figure class="shot"><img src="img/gm-feedback.webp" alt="Night photo of a lane-use sign beside the Google Maps screen showing only one right-turn lane" loading="lazy"></figure>
+            </div>
+          </div>
+          <div class="finding">
+            <span class="n" aria-hidden="true">2</span>
+            <div>
+              <h4>Directions turned into bare distances</h4>
+              <span class="src">Golden Rule 8 · Reduce short-term memory load</span>
+              <p>After the first two turns, Google's steps dropped street names entirely: turn left, 50 feet; turn right, 150 feet. On the same kind of route, Apple Maps described what to look for, such as a sidewalk or a path. That's recognition instead of recall.</p>
+              <p class="fix"><b>Fix:</b> landmark-based directions that name something the driver can see.</p>
+              <figure class="shot"><img src="img/gm-memory.webp" alt="Google Maps directions list of bare distances next to Apple Maps steps that name the sidewalk and path" loading="lazy"></figure>
+            </div>
+          </div>
+          <div class="finding">
+            <span class="n" aria-hidden="true">3</span>
+            <div>
+              <h4>Highway and frontage road were nearly the same color</h4>
+              <span class="src">WCAG 2.1 · 1.4.11 Non-text Contrast (AA)</span>
+              <p>I sampled the two road surfaces at a highway split and checked them in WebAIM's contrast checker. While I was evaluating it, the driver next to me looked at the screen and asked out loud whether we were supposed to merge yet.</p>
+              <p class="fix"><b>Fix:</b> distinct, high-contrast colors for ramps, lanes and frontage roads.</p>
+            </div>
+          </div>
+          <div class="finding">
+            <span class="n" aria-hidden="true">4</span>
+            <div>
+              <h4>Gemini sits right next to Exit</h4>
+              <span class="src">WCAG 2.1 · 2.5.2 Pointer Cancellation (A)</span>
+              <p>The Gemini button and the red Exit button share the bottom bar where a driver's thumb rests. A tap fires immediately, with no way to cancel, and a mis-tap on Exit ends navigation mid-drive.</p>
+              <p class="fix"><b>Fix:</b> more space between the two, and a confirmation before ending navigation.</p>
+              <figure class="shot"><img src="img/gm-pointer.webp" alt="Zoomed view of the Gemini button directly beside the red Exit button in the navigation bar" loading="lazy"></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Finding 3, measured</h3>
+      <div class="body wide">
+        <figure>
+          <div class="contrast">
+            <div class="swatch" style="background:#748DBA">Highway #748DBA</div>
+            <div class="swatch" style="background:#688AC7">Frontage #688AC7</div>
+            <div class="ratio">
+              <span class="val">1.03:1</span>
+              <span class="req">Measured contrast</span>
+              <div class="bar" aria-hidden="true"><span style="width:34.3%"></span></div>
+              <span class="req">WCAG 1.4.11 requires 3:1. A ratio of 1:1 means identical colors.</span>
+            </div>
+          </div>
+          <figcaption>The two road surfaces I sampled from a Google Maps screenshot at an I-10 split, at their actual colors. Only thin white lines separate them; the route line is the only thing that stands out.</figcaption>
+        </figure>
+        <figure class="shot"><img src="img/gm-contrast.webp" alt="WebAIM contrast checker reporting 1.03 to 1 next to the Google Maps highway split it was sampled from" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Deliverable</h3>
+      <div class="body">
+        <p>I presented the findings as a 5 to 7 minute video essay with a live demo. The video itself had to meet the standards it was judging, so it includes corrected closed captions and spoken audio descriptions of every visual.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>What I learned</h3>
+      <div class="body">
+        <p>WCAG is written for web content, so applying it to a native map app took judgment, and I said so in the review. I also learned to measure rather than eyeball: automated checkers like WAVE can't scan a phone screen, so I sampled the colors by hand.</p>
+      </div>
+    </section>
+  </article>
+
+  <!-- ============ DISCORD ============ -->
+  <article class="case" id="discord" aria-labelledby="dc-title">
+    <div class="case-head">
+      <span class="label">Case study 03 · User research</span>
+      <span class="status">In progress</span>
+      <h2 id="dc-title">Discord for Classrooms</h2>
+      <p class="sub">Computer science classes at UH run on Discord, but it was built for gaming communities. We set out to learn where it breaks down for students and the TAs who run class servers.</p>
+      <dl class="meta">
+        <div><dt>My role</dt><dd>UX researcher, team project</dd></div>
+        <div><dt>Users</dt><dd>CS students and TAs</dd></div>
+        <div><dt>Timeline</dt><dd>Fall 2026</dd></div>
+        <div><dt>Methods</dt><dd>Stakeholder mapping, semi-structured interviews</dd></div>
+      </dl>
+    </div>
+
+    <section class="block">
+      <h3>Progress</h3>
+      <div class="body wide">
+        <ol class="steps">
+          <li class="done"><span>Done</span>Stakeholder map</li>
+          <li class="done"><span>Done</span>Interviews</li>
+          <li><span>Next</span>Affinity map and persona</li>
+          <li><span>Next</span>Expert review</li>
+          <li><span>Next</span>Wireframes to Figma prototype</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Research approach</h3>
+      <div class="body">
+        <p>We mapped stakeholders first: students, group admins and TAs as primary users; developers and parents as secondary; advertisers and sponsors as tertiary. Then we wrote an interview guide that starts broad (“tell me about the last time you used Discord for a class”) and narrows into notifications, finding old information, and moderation.</p>
+        <p>We interviewed computer science seniors and a TA who owns and moderates a course server used for exam review sessions with 50 to 70 attendees.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>What we're hearing</h3>
+      <div class="body wide">
+        <div class="quotes">
+          <div class="quote"><p>Muting a busy server means going into every channel one at a time.</p><span>Student · notifications</span></div>
+          <div class="quote"><p>Busy channels rate about a 6 out of 10 to keep up with. A catch-up view would make it an 8 or 9.</p><span>Student · information overload</span></div>
+          <div class="quote"><p>When Canvas and Discord disagree on an assignment, Discord wins, because the Canvas version may be years old.</p><span>Student · source of truth</span></div>
+          <div class="quote"><p>Keeping servers free of spam bots and leaked exams takes a couple of hours a day.</p><span>TA · moderation load</span></div>
+        </div>
+        <p style="font-size:.85rem; color:var(--muted); margin-top:4px">Paraphrased from interviews. Participants are anonymized.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Emerging themes</h3>
+      <div class="body">
+        <ul class="plain">
+          <li><b>Notification overload.</b> Students turn notifications off entirely or switch to Do Not Disturb to study, then miss announcements.</li>
+          <li><b>Finding old information is manual.</b> People scroll to catch up, and the desktop app lacks the media view that helps on mobile.</li>
+          <li><b>Pseudonyms lower the barrier to asking.</b> Students ask questions on Discord they wouldn't ask under their real name in Teams.</li>
+          <li><b>TA presence drives engagement.</b> Servers stay active when TAs answer; they go quiet when instructions are vague.</li>
+          <li><b>Big servers overwhelm newcomers.</b> Verification steps and dozens of channels keep new members from ever posting.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Next</h3>
+      <div class="body">
+        <p>We're synthesizing these into an affinity map, persona and user story, then running an expert review and taking a redesign from paper wireframes to an interactive Figma prototype. I'll update this case study as it develops.</p>
+      </div>
+    </section>
+  </article>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div>
+      <h2 id="about-title">About me</h2>
+      <div class="body">
+        <p>Before UX, I spent hundreds of hours in clinics. As a medical assistant I used eClinicalWorks every day and saw where it slowed staff down. As a volunteer at Ben Taub Hospital, I've watched clinicians in the ED, ICU and NICU work with Epic and noticed which alerts helped care and which interrupted it.</p>
+        <p>That's what pulled me toward HCI. I like the research side most: sitting with someone, finding the moment they hesitate, and asking why. Because I'm also a developer, I can carry a finding all the way to a working prototype in React.</p>
+        <p>I speak English, Urdu and Arabic, and I teach weekend school, which has made me good at explaining things simply.</p>
+      </div>
+      <div class="contact">
+        <span class="email" id="email">safaansari9631@gmail.com</span>
+        <button class="copy" id="copy-email" type="button">Copy email</button>
+      </div>
+      <div class="links" style="margin-top:16px">
+        <a href="https://www.linkedin.com/in/safa-a-868620374" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/SA15925" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <dl>
+      <div><dt>Research</dt><dd>User interviews, usability testing, surveys, affinity mapping, personas, journey maps, expert review</dd></div>
+      <div><dt>Design</dt><dd>Wireframing, prototyping, task flows, WCAG 2.1 accessibility</dd></div>
+      <div><dt>Tools</dt><dd>Figma, FigJam, HTML, CSS, JavaScript, React, Tailwind, Python, SQL</dd></div>
+      <div><dt>Also built</dt><dd>QueueSmart, a clinic queue app with a vitals-based triage flow, and Library Maze, a 3D game that teaches players with no written instructions</dd></div>
+    </dl>
+  </section>
+
+  <footer>Safa Ansari · University of Houston, B.S. Computer Science 2026</footer>
+</div>
+
+<script>
+document.getElementById('copy-email').addEventListener('click', function(){
+  var btn = this, text = document.getElementById('email').textContent;
+  function selectIt(){
+    var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent = 'Selected. Press Ctrl+C';
+  }
+  try{
+    navigator.clipboard.writeText(text).then(function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy email'; }, 2000); }, selectIt);
+  }catch(e){ selectIt(); }
+});
+</script>
+
+</body>
+</html>
